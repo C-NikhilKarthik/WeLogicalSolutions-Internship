@@ -1,0 +1,55 @@
+.logo {
+  width: 5em;
+}
+nav {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  background:white;
+}
+.first-container {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  min-width: 10rem;
+}
+.search-input {
+  padding: 8px 2rem;
+  border: 1px solid #a5a4a4;
+  border-radius: 5px;
+}
+.search-input::placeholder {
+  color: #a5a4a4;
+}
+.search-input:focus {
+  outline: none;
+}
+.search-icon {
+  position: absolute;
+  left: 0;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  color: #a5a4a4;
+}
+.second-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.profile{
+  background:rgb(216, 154, 20) ;
+  height:2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+.bell-icon {
+  font-size: larger;
+  color: #a5a4a4;
+}
