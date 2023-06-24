@@ -1,0 +1,146 @@
+<main>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Customer Details</mat-card-title>
+      <button mat-raised-button color="warn">
+        <mat-icon>search</mat-icon>
+        Search Leads
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="form-field">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" [(ngModel)]="firstname" />
+        <button
+          *ngIf="firstname"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="firstname = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput required type="text" [(ngModel)]="lastname" />
+        <button
+          *ngIf="lastname"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="lastname = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Phone Number</mat-label>
+        <input matInput required type="number" [(ngModel)]="phonenumber" />
+        <button
+          *ngIf="phonenumber"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="phonenumber = null"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput required type="email" [(ngModel)]="email" />
+        <button
+          *ngIf="email"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="email = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="Label-grp">
+        <label>Gender</label>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button class="border-button" value="Male">
+            <span class="material-symbols-outlined"> man </span>
+            Male</mat-radio-button
+          >
+          <mat-radio-button class="border-button" value="Female">
+            <span class="material-symbols-outlined"> woman </span>
+            Female</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+
+      <div class="Label-grp">
+        <label>Age</label>
+        <div class="slider">
+          <mat-slider min="0" max="100" step="1" discrete>
+            <input matSliderThumb [(ngModel)]="value" />
+            <div class="values">
+              <div>{{ min }}</div>
+              <div>{{ max }}</div>
+            </div>
+          </mat-slider>
+          <mat-form-field>
+            <input matInput type="number" [(ngModel)]="value" />
+          </mat-form-field>
+          <div>Years</div>
+        </div>
+      </div>
+
+      <div class="Label-grp">
+        <label>Martial Status</label>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button class="border-button" value="Single">
+            <span class="material-symbols-outlined"> person </span>
+            Single</mat-radio-button
+          >
+          <mat-radio-button class="border-button" value="Married">
+            <span class="material-symbols-outlined"> group </span>
+            Married</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+
+      <div class="Label-grp">
+        <label>Children</label>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="Yes"> Yes</mat-radio-button>
+          <mat-radio-button value="No"> No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field class="bottom">
+        <mat-select [placeholder]="placeholder" [(ngModel)]="selectedValue" name="purpose">
+          <mat-option
+            *ngFor="let select of SelectValues"
+            [value]="select.value"
+          >
+            {{ select.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="bottom">
+        <mat-label>Number of Children</mat-label>
+        <input matInput type="number" [(ngModel)]="children" />
+        <button
+          *ngIf="children"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="children = null"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</main>

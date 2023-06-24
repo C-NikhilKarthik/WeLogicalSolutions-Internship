@@ -53,3 +53,17 @@ nav {
   font-size: larger;
   color: #a5a4a4;
 }
+
+nav div a{
+  background:#e7eff3;
+  color:#828384;
+  white-space: nowrap;
+  padding:3px 5px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+nav div a:hover,nav div a.active{
+  color:#039be5;
+  background:#cfd8dc;
+}

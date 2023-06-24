@@ -3,6 +3,9 @@
 html, body { height: 100dvh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-*{
-  box-sizing: border-box !important;
+app-employee-form{
+  height:100%;
+  width:100%;
+  padding:2rem;
+  box-sizing: border-box;
 }

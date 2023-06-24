@@ -1,0 +1,104 @@
+main{
+  background:#f3f6fc;
+  height: 100%;
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container{
+  display:grid;
+  grid-template-columns: 6em 1fr;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.main-content{
+  padding:2.5rem 1rem;
+  display:flex;
+  height:100%;
+  flex-direction: column;
+  gap:2rem;
+}
+
+mat-card{
+  width:100%;
+}
+mat-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #abaaaa;
+}
+
+@media only screen and (min-width : 900px) {
+  mat-card-content{
+    display:grid !important;
+    grid-template-columns: 1fr 1fr;
+    padding:2rem 1rem;
+    column-gap:1.5rem;
+  }
+}
+mat-card-content{
+  display:flex;
+  flex-direction: column;
+  padding:2rem 1rem;
+  /* column-gap:1.5rem; */
+}
+
+.Label-grp{
+  display:flex;
+  flex-direction: column;
+  gap:0.5rem;
+}
+
+.border-button{
+  border:1px solid #abaaaa;
+  padding:0.2rem 0.8rem 0.2rem 0.4rem;
+  border-radius: 6px;
+  width:8rem
+}
+
+mat-radio-group{
+  display: flex;
+  gap:1rem;
+}
+
+.border-button:has(input:checked){
+  border:1px solid #267dc0;
+}
+
+::ng-deep .mdc-radio:has(input:checked) + label{
+  color: #267dc0;
+}
+
+::ng-deep label{
+  display: flex;
+  gap:0.8rem;
+  align-items: center;
+}
+
+.slider{
+  display: flex;
+  gap:1rem;
+  width:100%;
+  align-items:center;
+}
+
+mat-slider{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.values{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+}
+
+.bottom{
+  margin-top:1.5rem;
+}
