@@ -1,64 +1,44 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { CustomersService,CustomerDetails } from 'src/app/services/customers.service';
+import { CustomersService, CustomerDetails } from 'src/app/services/customers.service';
 
-export interface TableRow {
-  name: string;
-  email: string;
-}
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements AfterViewInit {
-  constructor(private details: CustomersService){}
-
-  displayedColumns: string[] = ['Name','Age','Gender','Purpose','Email','PhoneNumber','LastUpdated','Actions'];
-  dataSource = new MatTableDataSource<CustomerDetails>(this.details.getData());
-
+export class TableComponent implements OnInit, AfterViewInit {
+  dataSource = new MatTableDataSource<CustomerDetails>();
+  displayedColumns: string[] = ['Name', 'Age', 'Gender', 'Purpose', 'Email', 'PhoneNumber', 'LastUpdated', 'Actions'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(private details: CustomersService) { }
+
+  ngOnInit() {
+    this.details.fetchData();
+    this.details.getDataObservable().subscribe(data => {
+      this.dataSource.data = data;
+    });
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-
-    console.log(this.details.getData());
+    this.dataSource.sort = this.sort;
   }
 
-  deleteRow(row:any): void {
-    const index = this.dataSource.data.indexOf(row);
-      this.dataSource.data.splice(index, 1);
-      this.dataSource._updateChangeSubscription();
+  deleteRow(customerId: number): void {
+    this.details.deleteCustomer(customerId).subscribe(r => {
+      this.details.fetchData();
+      this.details.getDataObservable().subscribe(data => {
+        this.dataSource.data = data;
+      });
+    })
   }
-
-  // deleteTicket(rowid: any) {
-  //   const index = this.dataSource.data.indexOf(rowid);
-  //   this.dataSource.data.splice(index, 1);
-  //   this.dataSource._updateChangeSubscription();
-  //   }
-
 }
-
-// export interface List {
-//   Name:string;
-//   Age:number;
-//   Gender:string;
-//   Purpose:string;
-//   Email:string;
-//   PhoneNumber:number;
-//   LastUpdated:Date;
-//   button:string;
-// }
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
 
 // const FNA_LIST: List[] = [
 //   {Name:'Velles Test',Age:36,Gender:'Male',Purpose:'Dream Planning',Email:'Velis@gmail.com',PhoneNumber:4567,LastUpdated:new Date('2021-07-01'),button:'delete'},
@@ -69,26 +49,3 @@ export class TableComponent implements AfterViewInit {
 //   {Name:'test3 test',Age:1,Gender:'Male',Purpose:'Retirement Planning',Email:'test3@test.com',PhoneNumber:56576,LastUpdated:new Date('2021-07-01'),button:'delete'},
 //   {Name:'Test2 Test',Age:25,Gender:'Male',Purpose:'Income Protection',Email:'test2@test.com',PhoneNumber:565657,LastUpdated:new Date('2021-07-01'),button:'delete'},
 // ]
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-//   {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-//   {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-//   {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-//   {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-//   {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-//   {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-//   {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-//   {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-//   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-//   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-// ];

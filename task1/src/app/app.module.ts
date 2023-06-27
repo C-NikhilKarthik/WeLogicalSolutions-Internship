@@ -27,7 +27,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatOptionModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -63,6 +63,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatOptionModule,
     MatSelectModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

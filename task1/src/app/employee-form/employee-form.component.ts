@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomersService, CustomerDetails } from '../services/customers.service';
 
 interface Select {
@@ -16,31 +16,28 @@ export class EmployeeFormComponent {
 
   constructor(private formBuilder: FormBuilder, private details: CustomersService) {
     this.CustomerForm = formBuilder.group({
-      firstname: [''],
-      lastName: [''],
-      phonenumber: [],
-      email: [''],
-      age: [],
-      gender: [''],
-      purpose: [''],
-      date: [new Date()]
+      id:this.formBuilder.control({value:'',disabled:true}),
+      firstname: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]],
+      lastname: ['', Validators.required],
+      phonenumber: [null, Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      age: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+      gender: ['', Validators.required],
+      purpose: ['', Validators.required],
+      date: [new Date(), Validators.required]
     });
+
   }
 
   saveForm(): void {
-    const getvalues: CustomerDetails = {
-      Name: this.CustomerForm.value.firstname,
-      Age: this.CustomerForm.value.age,
-      Gender: this.CustomerForm.value.gender,
-      Purpose: this.CustomerForm.value.purpose,
-      Email: this.CustomerForm.value.email,
-      PhoneNumber: this.CustomerForm.value.phonenumber,
-      LastUpdated: new Date('2023-07-21'),
-      button: 'delete'
-    };
-    this.details.add(getvalues);
-    console.log("Saving", getvalues);
-    console.log("Data", this.details.getData());
+
+    if (this.CustomerForm.valid) {
+      this.details.createCustomer(this.CustomerForm.value).subscribe(res => {
+        alert('Customer saved');
+      });
+    } else {
+      console.log("Form is not valid");
+    }
   }
 
   disabled = false;

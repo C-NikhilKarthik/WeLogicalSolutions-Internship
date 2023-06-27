@@ -1,4 +1,4 @@
-<form [formGroup]="CustomerForm">
+<form [formGroup]="CustomerForm" (ngSubmit)="saveForm()" novalidate>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Customer Details</mat-card-title>
@@ -10,7 +10,13 @@
     <mat-card-content>
       <mat-form-field class="form-field">
         <mat-label>First Name</mat-label>
-        <input formControlName="firstname" matInput type="text" [(ngModel)]="firstname" />
+        <input formControlName="firstname" matInput required type="text" />
+        <mat-hint
+          style="color: red"
+          *ngIf="CustomerForm.get('firstname')?.touched && CustomerForm.get('firstname')?.errors?.['required']"
+        >
+          First Name is required
+        </mat-hint>
         <button
           *ngIf="firstname"
           matSuffix
@@ -24,7 +30,13 @@
 
       <mat-form-field class="form-field">
         <mat-label>Last Name</mat-label>
-        <input formControlName="lastName" matInput required type="text" [(ngModel)]="lastname" />
+        <input formControlName="lastname" matInput required type="text" />
+        <mat-hint
+          style="color: red"
+          *ngIf="CustomerForm.get('lastname')?.touched && CustomerForm.get('lastname')?.errors?.['required']"
+        >
+          Last Name is required
+        </mat-hint>
         <button
           *ngIf="lastname"
           matSuffix
@@ -38,7 +50,13 @@
 
       <mat-form-field class="form-field">
         <mat-label>Phone Number</mat-label>
-        <input formControlName="phonenumber" matInput required type="number" [(ngModel)]="phonenumber" />
+        <input formControlName="phonenumber" matInput required type="number" />
+        <mat-hint
+          style="color: red"
+          *ngIf="CustomerForm.get('phonenumber')?.touched && CustomerForm.get('phonenumber')?.errors?.['required']"
+        >
+          Phone Number is required
+        </mat-hint>
         <button
           *ngIf="phonenumber"
           matSuffix
@@ -52,7 +70,13 @@
 
       <mat-form-field class="form-field">
         <mat-label>Email</mat-label>
-        <input formControlName="email" matInput required type="email" [(ngModel)]="email" />
+        <input formControlName="email" matInput required type="email" />
+        <mat-hint
+          style="color: red"
+          *ngIf="CustomerForm.get('email')?.touched && CustomerForm.get('email')?.errors?.['required']"
+        >
+          Email is required
+        </mat-hint>
         <button
           *ngIf="email"
           matSuffix
@@ -76,23 +100,62 @@
             Female</mat-radio-button
           >
         </mat-radio-group>
+
+        <mat-error *ngIf="CustomerForm.get('gender')?.errors?.['required']">
+          Gender is required
+        </mat-error>
       </div>
 
-      <div class="Label-grp">
+      <!-- <div class="Label-grp">
         <label>Age</label>
         <div class="slider">
           <mat-slider   min="0" max="100" step="1" discrete>
-            <input formControlName="age"  matSliderThumb [(ngModel)]="value" />
+            <input formControlName="age"  matSliderThumb />
             <div class="values">
               <div>{{ min }}</div>
               <div>{{ max }}</div>
             </div>
           </mat-slider>
           <mat-form-field>
-            <input matInput formControlName="age" type="number" [(ngModel)]="value" />
+            <input matInput formControlName="age" type="number" />
           </mat-form-field>
           <div>Years</div>
         </div>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['required']">
+          Age is required
+        </mat-error>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['min']">
+          Age must be at least 0
+        </mat-error>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['max']">
+          Age cannot exceed 100
+        </mat-error>
+      </div> -->
+
+      <div class="Label-grp">
+        <label>Age</label>
+        <div class="slider">
+          <mat-slider min="0" max="100" step="1" discrete>
+            <input matSliderThumb />
+            <div class="values">
+              <div>{{ min }}</div>
+              <div>{{ max }}</div>
+            </div>
+          </mat-slider>
+          <mat-form-field>
+            <input matInput formControlName="age" type="number" />
+          </mat-form-field>
+          <div>Years</div>
+        </div>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['required']">
+          Age is required
+        </mat-error>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['min']">
+          Age must be at least 0
+        </mat-error>
+        <mat-error *ngIf="CustomerForm.get('age')?.errors?.['max']">
+          Age cannot exceed 100
+        </mat-error>
       </div>
 
       <div class="Label-grp">
@@ -117,8 +180,19 @@
         </mat-radio-group>
       </div>
 
-      <mat-form-field class="bottom">
+      <!-- <mat-form-field class="bottom">
         <mat-select formControlName="purpose" [placeholder]="placeholder" [(ngModel)]="selectedValue" name="purpose">
+          <mat-option
+            *ngFor="let select of SelectValues"
+            [value]="select.value"
+          >
+            {{ select.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <mat-form-field class="bottom">
+        <mat-select formControlName="purpose" [placeholder]="placeholder">
           <mat-option
             *ngFor="let select of SelectValues"
             [value]="select.value"
@@ -130,7 +204,7 @@
 
       <mat-form-field class="bottom">
         <mat-label>Number of Children</mat-label>
-        <input matInput type="number" [(ngModel)]="children" />
+        <input matInput type="number" />
         <button
           *ngIf="children"
           matSuffix
@@ -143,7 +217,14 @@
       </mat-form-field>
 
       <div class="bottom">
-        <button (click)="saveForm()" mat-raised-button color="warn">Submit</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!CustomerForm.valid"
+        >
+          Submit
+        </button>
       </div>
     </mat-card-content>
   </mat-card>

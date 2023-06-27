@@ -1,0 +1,15 @@
+{
+  "customers": [
+    {
+      "firstname": "Nikhil",
+      "lastname": "Karthik",
+      "phonenumber": 9901630824,
+      "email": "nikhilkarthik241103@gmail.com",
+      "age": 19,
+      "gender": "Male",
+      "purpose": "Dream Planning",
+      "date": "2023-06-27T17:41:32.419Z",
+      "id": 1
+    }
+  ]
+}
