@@ -30,15 +30,31 @@ export class EmployeeFormComponent {
   }
 
   saveForm(): void {
-
     if (this.CustomerForm.valid) {
-      this.details.createCustomer(this.CustomerForm.value).subscribe(res => {
+      const currentTime = new Date();
+      const formattedDate = currentTime.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      });
+
+      const customerData = {
+        ...this.CustomerForm.value,
+        LastUpdated: formattedDate
+      };
+
+      this.details.createCustomer(customerData).subscribe(res => {
         alert('Customer saved');
       });
     } else {
       console.log("Form is not valid");
     }
   }
+
+
 
   disabled = false;
   max = 100;

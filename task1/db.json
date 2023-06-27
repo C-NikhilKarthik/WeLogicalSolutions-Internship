@@ -8,8 +8,33 @@
       "age": 19,
       "gender": "Male",
       "purpose": "Dream Planning",
-      "date": "2023-06-27T17:41:32.419Z",
+      "date": "2023-06-27T17:58:25.185Z",
+      "LastUpdated": "06/27/2023, 11:28 PM",
       "id": 1
+    },
+    {
+      "firstname": "Nikhil",
+      "lastname": "Karthik",
+      "phonenumber": 9901630824,
+      "email": "nikhilkarthik241103@gmail.com",
+      "age": 19,
+      "gender": "Male",
+      "purpose": "Dream Planning",
+      "date": "2023-06-27T17:58:25.185Z",
+      "LastUpdated": "06/27/2023, 11:29 PM",
+      "id": 7
+    },
+    {
+      "firstname": "Nikhil",
+      "lastname": "Karthik",
+      "phonenumber": 9901630824,
+      "email": "nikhilkarthik241103@gmail.com",
+      "age": 19,
+      "gender": "Male",
+      "purpose": "Dream Planning",
+      "date": "2023-06-27T17:58:25.185Z",
+      "LastUpdated": "06/27/2023, 11:29 PM",
+      "id": 8
     }
   ]
 }
